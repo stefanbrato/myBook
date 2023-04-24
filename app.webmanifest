@@ -1,0 +1,22 @@
+{
+  "name": "myBook",
+  "short_name": "My Book",
+  "start_url": "./",
+  "orientation": "portrait",
+  "theme_color": "#ffc252",
+  "scope": "./",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "icons/cat.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/catx192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

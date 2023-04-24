@@ -1,0 +1,6 @@
+@media (display-mode: standalone) {
+  main {
+    padding: env(safe-area-insert-top) env(safe-area-insert-right)
+      env(safe-area-insert-bottom) env(safe-area-insert-left);
+  }
+}

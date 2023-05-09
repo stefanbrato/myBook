@@ -1,30 +1,36 @@
 import "./components/side-bar.js";
-import { initDatabase, readDb, getSkills } from "./scripts/db-scripts.js";
+import "./components/top-bar.js";
+import { initDatabase } from "./scripts/db-scripts.js";
 
-import { LitElement, html, css } from "lit";
-
-export class Main extends LitElement {
+export class Main extends HTMLElement {
   /* ... */
-  static properties = {
-    mode: { type: String },
-    itemList: {},
-  };
-
-  constructor() {
-    super();
-    initDatabase();
-  }
-
   static get styles() {
-    return css`
+    return `
       p {
         color: green;
       }
     `;
   }
 
+  constructor() {
+    super();
+    const styles = new CSSStyleSheet();
+    styles.replaceSync(Main.styles);
+
+    const shadow = this.attachShadow({ mode: "open" });
+    shadow.adoptedStyleSheets = [styles];
+    initDatabase();
+  }
+
+  connectedCallback() {
+    this.render();
+  }
+
   render() {
-    return html`<side-bar .skills=${getSkills()}></side-bar>`;
+    const sideBar = document.createElement("side-bar");
+    const topBar = document.createElement("top-bar");
+    this.shadowRoot.appendChild(sideBar);
+    this.shadowRoot.appendChild(topBar);
   }
 }
 customElements.define("app-main", Main);

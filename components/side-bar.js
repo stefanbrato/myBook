@@ -1,44 +1,62 @@
-import { LitElement, html, css } from "lit";
+import { readDb, getSkills } from "../scripts/db-scripts.js";
 
-export class SideBar extends LitElement {
-  /* ... */
-  static get properties() {
-    return {
-      skills: { type: Array },
-    };
+export class SideBar extends HTMLElement {
+  static get styles() {
+    return `    
+        .skills {
+            display: flex;
+            flex-direction: column;
+            width: 100px;
+        }
+    
+        .skill {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;`;
   }
 
   constructor() {
     super();
-    console.log(this.skills);
-  }
-  static styles = css`
-    .skills {
-      display: flex;
-      flex-direction: column;
-      width: 100px;
-    }
+    const styles = new CSSStyleSheet();
+    styles.replaceSync(SideBar.styles);
 
-    .skill {
-      display: flex;
-      flex-direction: row;
-      gap: 1rem;
-    }
-  `;
+    const shadow = this.attachShadow({ mode: "open" });
+    shadow.adoptedStyleSheets = [styles];
+  }
+
+  connectedCallback() {
+    this.render();
+  }
 
   render() {
-    return html` <div class="skills">
-      ${this.skills
-        ? html`${this.skills.map((skill) => {
-            return html`<button class="skill">
-              <div>${skill.skillName}</div>
-              <label>${skill.level}</label>
-            </button>`;
-          })}`
-        : html``}
-    </div>`;
+    const skillList = getSkills();
+    const listContainer = document.createElement("ul");
+    listContainer.classList.add("skill-list");
+    skillList.map((skill) => {
+      let skillContainer = document.createElement("li");
+      skillContainer.classList.add("skill");
+      let button = document.createElement("button");
+      button.setAttribute("skill", `${skill.skillName}`);
+      button.textContent = `${skill.skillName}  ${skill.level}`;
+      skillContainer.appendChild(button);
+      listContainer.appendChild(skillContainer);
+    });
+    listContainer.addEventListener("click", (event) =>
+      this.#selectSkill(event)
+    );
+    this.shadowRoot.appendChild(listContainer);
   }
 
-  testfunction() {}
+  #selectSkill(event) {
+    const selectedSkill = event.target.getAttribute("skill");
+    console.log(event.target.getAttribute("skill"));
+    this.shadowRoot.dispatchEvent(
+      new CustomEvent("skillSelected", {
+        detail: selectedSkill,
+        bubbles: true,
+        composed: true,
+      })
+    );
+  }
 }
 customElements.define("side-bar", SideBar);

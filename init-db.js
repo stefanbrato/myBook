@@ -20,6 +20,20 @@ export const initDb = {
       expToLvl: 100,
       level: 0,
     },
+    {
+      skillName: "Willpower2",
+      tasks: [
+        {
+          taskId: "1",
+          taskName: "First Task",
+          taskInstruction: "Click me Daily!",
+          exp: 0,
+        },
+      ],
+      exp: 0,
+      expToLvl: 100,
+      level: 0,
+    },
   ],
   settings: {},
 };

@@ -1,4 +1,4 @@
-import { readDb, getSkills } from "../scripts/db-scripts.js";
+import { readDb, getAllSkills } from "../scripts/db-scripts.js";
 
 export class SideBar extends HTMLElement {
   static get styles() {
@@ -29,7 +29,7 @@ export class SideBar extends HTMLElement {
   }
 
   render() {
-    const skillList = getSkills();
+    const skillList = getAllSkills();
     const listContainer = document.createElement("ul");
     listContainer.classList.add("skill-list");
     skillList.map((skill) => {
@@ -49,7 +49,6 @@ export class SideBar extends HTMLElement {
 
   #selectSkill(event) {
     const selectedSkill = event.target.getAttribute("skill");
-    console.log(event.target.getAttribute("skill"));
     this.shadowRoot.dispatchEvent(
       new CustomEvent("skillSelected", {
         detail: selectedSkill,

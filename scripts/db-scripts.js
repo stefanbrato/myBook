@@ -15,14 +15,13 @@ export function readDb() {
   return JSON.parse(localStorage.getItem(dbName));
 }
 
-export function getSkills() {
+export function getAllSkills() {
   const dbInfo = JSON.parse(localStorage.getItem(dbName));
   return dbInfo.skills;
 }
 
 export function getSkill(skillName) {
   const dbInfo = JSON.parse(localStorage.getItem(dbName));
-  return dbInfo.skills.filter((sk) => {
-    sk.skillName = skillName;
-  });
+  let result = dbInfo.skills.filter((sk) => sk.skillName === skillName);
+  return result[0];
 }

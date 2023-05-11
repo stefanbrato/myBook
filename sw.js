@@ -2,6 +2,7 @@ const assets = [
   "/",
   "./components",
   "./scripts",
+  "./styles",
   "https://ga.jspm.io/npm:@lit/reactive-element@1.6.1/reactive-element.js",
   "https://ga.jspm.io/npm:lit@2.7.0/index.js",
   "https://ga.jspm.io/npm:lit-element@3.3.0/lit-element.js",

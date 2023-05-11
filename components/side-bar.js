@@ -1,8 +1,34 @@
 import { readDb, getAllSkills } from "../scripts/db-scripts.js";
+import color from "../styles/colors.css" assert { type: "css" };
 
 export class SideBar extends HTMLElement {
   static get styles() {
-    return `    
+    return `
+        :host {
+          background-color:var(--light-brown);
+          height:100vh;
+        }
+
+        button {
+          background-color: var(--yellow);
+          width:100%;
+          padding: 10px;
+          border:0;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        }
+
+        button:hover {
+          background-color: var(--orange);
+        }
+
+        ul {
+          padding: 1rem;
+        }
+
+        li {
+          margin: 10px 10px;
+        }
+
         .skills {
             display: flex;
             flex-direction: column;
@@ -21,7 +47,7 @@ export class SideBar extends HTMLElement {
     styles.replaceSync(SideBar.styles);
 
     const shadow = this.attachShadow({ mode: "open" });
-    shadow.adoptedStyleSheets = [styles];
+    shadow.adoptedStyleSheets = [color, styles];
   }
 
   connectedCallback() {
@@ -41,13 +67,11 @@ export class SideBar extends HTMLElement {
       skillContainer.appendChild(button);
       listContainer.appendChild(skillContainer);
     });
-    listContainer.addEventListener("click", (event) =>
-      this.#selectSkill(event)
-    );
+    listContainer.addEventListener("click", (event) => this.selectSkill(event));
     this.shadowRoot.appendChild(listContainer);
   }
 
-  #selectSkill(event) {
+  selectSkill(event) {
     const selectedSkill = event.target.getAttribute("skill");
     this.shadowRoot.dispatchEvent(
       new CustomEvent("skillSelected", {

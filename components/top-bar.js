@@ -1,8 +1,13 @@
 import { readDb, getSkill } from "../scripts/db-scripts.js";
+import color from "../styles/colors.css" assert { type: "css" };
 
 export class TopBar extends HTMLElement {
   static get styles() {
     return `    
+        :host{
+          background-color: var(--yellow);
+          height: 10vh;
+        }
         .skills {
             display: flex;
             flex-direction: column;
@@ -23,7 +28,7 @@ export class TopBar extends HTMLElement {
     styles.replaceSync(TopBar.styles);
 
     const shadow = this.attachShadow({ mode: "open" });
-    shadow.adoptedStyleSheets = [styles];
+    shadow.adoptedStyleSheets = [color, styles];
 
     const parent = document.querySelector("app-main");
     parent.addEventListener("skillSelected", this.onSkillSelected.bind(this));

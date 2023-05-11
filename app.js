@@ -6,8 +6,21 @@ export class Main extends HTMLElement {
   /* ... */
   static get styles() {
     return `
-      p {
-        color: green;
+      :host {
+        display:grid;
+        grid-template-areas:
+          "a b b"
+          "a c c"
+          "a c c";
+        grid-template-columns: 200px 1fr;
+      }
+
+      side-bar {
+        grid-area: a;
+      }
+
+      top-bar {
+        grid-area: b;
       }
     `;
   }

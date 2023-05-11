@@ -1,0 +1,8 @@
+/* Color Theme Swatches in Hex */
+:host {
+  --yellow: #f2e8c9;
+  --brown: #734e40;
+  --light-brown: #bf9788;
+  --orange: #f26457;
+  --black: #0d0d0d;
+}

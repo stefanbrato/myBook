@@ -1,5 +1,6 @@
 import "./components/side-bar.js";
 import "./components/top-bar.js";
+import "./components/content-bar.js";
 import { initDatabase } from "./scripts/db-scripts.js";
 
 export class Main extends HTMLElement {
@@ -22,6 +23,10 @@ export class Main extends HTMLElement {
       top-bar {
         grid-area: b;
       }
+
+      content-bar {
+        grid-area: c;
+      }
     `;
   }
 
@@ -42,8 +47,10 @@ export class Main extends HTMLElement {
   render() {
     const sideBar = document.createElement("side-bar");
     const topBar = document.createElement("top-bar");
+    const contentBar = document.createElement("content-bar");
     this.shadowRoot.appendChild(sideBar);
     this.shadowRoot.appendChild(topBar);
+    this.shadowRoot.appendChild(contentBar);
   }
 }
 customElements.define("app-main", Main);

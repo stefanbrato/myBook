@@ -25,3 +25,10 @@ export function getSkill(skillName) {
   let result = dbInfo.skills.filter((sk) => sk.skillName === skillName);
   return result[0];
 }
+
+export function getTasks(skillName) {
+  const dbInfo = JSON.parse(localStorage.getItem(dbName));
+  let skill = dbInfo.skills.filter((sk) => sk.skillName === skillName);
+  const result = skill[0].tasks;
+  return result[0];
+}
